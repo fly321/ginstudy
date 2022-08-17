@@ -2,6 +2,12 @@ package main
 
 import "github.com/gin-gonic/gin"
 
+type Article struct {
+	Title   string `json:"title"`
+	Desc    string `json:"desc"`
+	Content string `json:"content"`
+}
+
 func main() {
 	// Creates a gin router with default middleware:
 	r := gin.Default()
@@ -31,6 +37,14 @@ func main() {
 		context.JSON(200, map[string]interface{}{
 			"message": "pong2",
 			"success": true,
+		})
+	})
+
+	r.GET("/json3", func(context *gin.Context) {
+		context.JSON(200, Article{
+			Title:   "GO语言",
+			Desc:    "GO语言是一种简单的面向对象的编程语言",
+			Content: "GO语言是一种简单的面向对象的编程语言",
 		})
 	})
 
