@@ -15,8 +15,8 @@ func main() {
 	// Creates a gin router with default middleware:
 	r := gin.Default()
 
-	// 配置模板目录
-	r.LoadHTMLGlob("templates/*")
+	// 配置模板目录 ** 代表目录
+	r.LoadHTMLGlob("templates/**/*")
 
 	r.GET("/ping", func(c *gin.Context) {
 		/*c.JSON(200, gin.H{
@@ -55,7 +55,13 @@ func main() {
 	})
 
 	r.GET("/html1", func(context *gin.Context) {
-		context.HTML(http.StatusOK, "1.html", gin.H{
+		context.HTML(http.StatusOK, "home.1", gin.H{
+			"name": "Main website",
+		})
+	})
+
+	r.GET("/html2", func(context *gin.Context) {
+		context.HTML(http.StatusOK, "home.index", gin.H{
 			"name": "Main website",
 		})
 	})
