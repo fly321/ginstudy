@@ -16,7 +16,21 @@ func main() {
 
 	r.GET("/jsonDemo", func(c *gin.Context) {
 		c.JSON(200, gin.H{
-			"message": "pong",
+			"message": "pong1",
+		})
+	})
+
+	r.GET("/json1", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"message": "pong1",
+			"success": true,
+		})
+	})
+
+	r.GET("/json2", func(context *gin.Context) {
+		context.JSON(200, map[string]interface{}{
+			"message": "pong2",
+			"success": true,
 		})
 	})
 
