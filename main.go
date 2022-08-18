@@ -66,5 +66,27 @@ func main() {
 		})
 	})
 
+	r.GET("/html3", func(context *gin.Context) {
+		context.HTML(http.StatusOK, "home.index3", gin.H{
+			"title": "Main website",
+			"msg":   "hello world",
+			"score": 100,
+			"bool":  true,
+			"hobby": []string{"篮球", "足球", "游泳"},
+			"newsList": []interface{}{
+				&Article{
+					"Go1",
+					"GO语言是一种简单的面向对象的编程语言",
+					"GO语言是一种简单的面向对象的编程语言",
+				},
+				&Article{
+					"Go2",
+					"GO语言是一种简单的面向对象的编程语言",
+					"GO语言是一种简单的面向对象的编程语言",
+				},
+			},
+		})
+	})
+
 	r.Run(":8080") // listen and serve on
 }
