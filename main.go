@@ -2,7 +2,9 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
+	"html/template"
 	"net/http"
+	"time"
 )
 
 type Article struct {
@@ -11,9 +13,18 @@ type Article struct {
 	Content string `json:"content"`
 }
 
+func UnixToDate(timestamp int) string {
+	t := time.Unix(int64(timestamp), 0)
+	return t.Format("2006-01-02 15:04:05")
+}
+
 func main() {
 	// Creates a gin router with default middleware:
 	r := gin.Default()
+	// 自定义模板函数
+	r.SetFuncMap(template.FuncMap{
+		"UnixToDate": UnixToDate,
+	})
 
 	// 配置模板目录 ** 代表目录
 	r.LoadHTMLGlob("templates/**/*")
@@ -68,11 +79,12 @@ func main() {
 
 	r.GET("/html3", func(context *gin.Context) {
 		context.HTML(http.StatusOK, "home.index3", gin.H{
-			"title": "Main website",
-			"msg":   "hello world",
-			"score": 100,
-			"bool":  true,
-			"hobby": []string{"篮球", "足球", "游泳"},
+			"title":    "Main website",
+			"msg":      "hello world",
+			"score":    100,
+			"bool":     true,
+			"hobby":    []string{"篮球", "足球", "游泳"},
+			"unixtime": 1660837281,
 			"newsList": []interface{}{
 				&Article{
 					"Go1",
