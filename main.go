@@ -21,7 +21,7 @@ func UnixToDate(timestamp int) string {
 func main() {
 	// Creates a gin router with default middleware:
 	r := gin.Default()
-	// 自定义模板函数
+	// 自定义模板函数 要写在加载模板之前
 	r.SetFuncMap(template.FuncMap{
 		"UnixToDate": UnixToDate,
 	})
