@@ -26,6 +26,9 @@ func main() {
 		"UnixToDate": UnixToDate,
 	})
 
+	// 设置静态文件服务
+	r.Static("/static", "./static")
+
 	// 配置模板目录 ** 代表目录
 	r.LoadHTMLGlob("templates/**/*")
 
@@ -98,6 +101,18 @@ func main() {
 				},
 			},
 		})
+	})
+
+	r.GET("/get1", func(context *gin.Context) {
+		name := context.Query("name")
+		age := context.DefaultQuery("age", "20")
+		context.String(http.StatusOK, "name: %s, age: %s", name, age)
+	})
+
+	r.POST("/post1", func(context *gin.Context) {
+		name := context.PostForm("name")
+		age := context.DefaultPostForm("age", "20")
+		context.String(http.StatusOK, "name: %s, age: %s", name, age)
 	})
 
 	r.Run(":8080") // listen and serve on
