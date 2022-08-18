@@ -26,6 +26,9 @@ func main() {
 		"UnixToDate": UnixToDate,
 	})
 
+	// 设置静态文件服务
+	r.Static("/static", "./static")
+
 	// 配置模板目录 ** 代表目录
 	r.LoadHTMLGlob("templates/**/*")
 
