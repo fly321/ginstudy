@@ -118,9 +118,13 @@ func main() {
 	r.GET("/get2", func(context *gin.Context) {
 		student := &Student{}
 		if err := context.ShouldBindQuery(student); err != nil {
-			context.String(http.StatusOK, "err: %s", err.Error())
+			//context.String(http.StatusOK, "err: %s", err.Error())
+			context.JSON(http.StatusOK, gin.H{
+				"err": err.Error(),
+			})
 		} else {
-			context.String(http.StatusOK, "name: %s, age: %d", student.Name, student.Age)
+			//context.String(http.StatusOK, "name: %s, age: %d", student.Name, student.Age)
+			context.JSON(http.StatusOK, student)
 		}
 	})
 
