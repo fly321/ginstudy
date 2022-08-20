@@ -115,5 +115,19 @@ func main() {
 		context.String(http.StatusOK, "name: %s, age: %s", name, age)
 	})
 
+	r.GET("/get2", func(context *gin.Context) {
+		student := &Student{}
+		if err := context.ShouldBindQuery(student); err != nil {
+			context.String(http.StatusOK, "err: %s", err.Error())
+		} else {
+			context.String(http.StatusOK, "name: %s, age: %d", student.Name, student.Age)
+		}
+	})
+
 	r.Run(":8080") // listen and serve on
+}
+
+type Student struct {
+	Name string `json:"name" form:"name"`
+	Age  int    `json:"age" form:"age"`
 }
