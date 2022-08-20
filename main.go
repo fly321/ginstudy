@@ -128,7 +128,10 @@ func main() {
 		}
 	})
 
-	r.Run(":8080") // listen and serve on
+	err := r.Run(":8080")
+	if err != nil {
+		return
+	} // listen and serve on
 }
 
 type Student struct {
