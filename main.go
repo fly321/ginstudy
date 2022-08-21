@@ -154,6 +154,14 @@ func main() {
 		}
 	})
 
+	r.GET("/get3/:uid", func(context *gin.Context) {
+		//va := context.Params.ByName("uid")
+		va := context.Param("uid")
+		context.JSON(http.StatusOK, gin.H{
+			"uid": va,
+		})
+	})
+
 	err := r.Run(":8080")
 	if err != nil {
 		return
