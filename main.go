@@ -78,7 +78,7 @@ func main() {
 		})
 	})
 
-	r.GET("/html2", home.IndexView)
+	r.GET("/html2", home.UserController{}.IndexView)
 
 	r.GET("/html3", func(context *gin.Context) {
 		context.HTML(http.StatusOK, "home.index3", gin.H{

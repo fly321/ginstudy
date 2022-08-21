@@ -5,7 +5,10 @@ import (
 	"net/http"
 )
 
-func IndexView(context *gin.Context) {
+type UserController struct {
+}
+
+func (con UserController) IndexView(context *gin.Context) {
 	context.HTML(http.StatusOK, "home.index", gin.H{
 		"name": "Main website",
 	})
