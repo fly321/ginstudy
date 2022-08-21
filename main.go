@@ -22,6 +22,12 @@ func UnixToDate(timestamp int) string {
 	return t.Format("2006-01-02 15:04:05")
 }
 
+// 中间件
+func middlewareGet(content *gin.Context) {
+	fmt.Println("middlewareGet")
+	content.Next()
+}
+
 func main() {
 	// Creates a gin router with default middleware:
 	r := gin.Default()
@@ -79,7 +85,7 @@ func main() {
 	})
 
 	r.GET("/html2", home.UserController{}.IndexView)
-	r.GET("/baseSuccess", home.BaseController{}.Success)
+	r.GET("/baseSuccess", middlewareGet, home.BaseController{}.Success)
 
 	r.GET("/html3", func(context *gin.Context) {
 		context.HTML(http.StatusOK, "home.index3", gin.H{
