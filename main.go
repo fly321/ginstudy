@@ -1,6 +1,8 @@
 package main
 
 import (
+	"encoding/xml"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"html/template"
 	"net/http"
@@ -128,6 +130,30 @@ func main() {
 		}
 	})
 
+	r.POST("/xml1", func(context *gin.Context) {
+		article := &Article1{}
+		b, _ := context.GetRawData()
+		fmt.Println(string(b))
+		if err := xml.Unmarshal(b, &article); err != nil {
+			context.JSON(http.StatusBadRequest, gin.H{
+				"err": err.Error(),
+			})
+		} else {
+			context.JSON(http.StatusOK, article)
+		}
+	})
+
+	r.POST("/xml2", func(context *gin.Context) {
+		article := &Article1{}
+		if err := context.ShouldBindXML(article); err != nil {
+			context.JSON(http.StatusOK, gin.H{
+				"err": err.Error(),
+			})
+		} else {
+			context.JSON(http.StatusOK, article)
+		}
+	})
+
 	err := r.Run(":8080")
 	if err != nil {
 		return
@@ -137,4 +163,9 @@ func main() {
 type Student struct {
 	Name string `json:"name" form:"name"`
 	Age  int    `json:"age" form:"age"`
+}
+
+type Article1 struct {
+	Title string `json:"title" xml:"title"`
+	Desc  string `json:"desc" xml:"desc"`
 }
