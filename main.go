@@ -162,6 +162,17 @@ func main() {
 		})
 	})
 
+	g1 := r.Group("/group1/")
+	{
+		g1.GET(":uid", func(context *gin.Context) {
+			//va := context.Params.ByName("uid")
+			va := context.Param("uid")
+			context.JSON(http.StatusOK, gin.H{
+				"uid": va,
+			})
+		})
+	}
+
 	err := r.Run(":8080")
 	if err != nil {
 		return
