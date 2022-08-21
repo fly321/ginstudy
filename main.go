@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/xml"
 	"fmt"
+	"ginstudy/routers"
 	"github.com/gin-gonic/gin"
 	"html/template"
 	"net/http"
@@ -162,16 +163,7 @@ func main() {
 		})
 	})
 
-	g1 := r.Group("/group1/")
-	{
-		g1.GET(":uid", func(context *gin.Context) {
-			//va := context.Params.ByName("uid")
-			va := context.Param("uid")
-			context.JSON(http.StatusOK, gin.H{
-				"uid": va,
-			})
-		})
-	}
+	routers.DemoRouter(r)
 
 	err := r.Run(":8080")
 	if err != nil {
