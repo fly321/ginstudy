@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/xml"
 	"fmt"
+	"ginstudy/controller/home"
 	"ginstudy/routers"
 	"github.com/gin-gonic/gin"
 	"html/template"
@@ -77,11 +78,7 @@ func main() {
 		})
 	})
 
-	r.GET("/html2", func(context *gin.Context) {
-		context.HTML(http.StatusOK, "home.index", gin.H{
-			"name": "Main website",
-		})
-	})
+	r.GET("/html2", home.IndexView)
 
 	r.GET("/html3", func(context *gin.Context) {
 		context.HTML(http.StatusOK, "home.index3", gin.H{
