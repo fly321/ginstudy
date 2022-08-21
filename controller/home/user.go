@@ -6,6 +6,7 @@ import (
 )
 
 type UserController struct {
+	BaseController
 }
 
 func (con UserController) IndexView(context *gin.Context) {
