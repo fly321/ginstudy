@@ -2,6 +2,7 @@ package routers
 
 import (
 	"fmt"
+	"ginstudy/controller/home"
 	"ginstudy/middleware"
 	"github.com/gin-gonic/gin"
 	"net/http"
@@ -10,7 +11,7 @@ import (
 func DemoRouter(r *gin.Engine) {
 	g1 := r.Group("/group1/", middleware.Middlewares{}.InitMd)
 	{
-		g1.GET(":uid", func(context *gin.Context) {
+		g1.GET("qq/:uid", func(context *gin.Context) {
 			//va := context.Params.ByName("uid")
 			va := context.Param("uid")
 			fmt.Println(context.Get("name"))
@@ -18,5 +19,8 @@ func DemoRouter(r *gin.Engine) {
 				"uid": va,
 			})
 		})
+
+		g1.POST("doUpload", home.BaseController{}.UploadFile)
+
 	}
 }
