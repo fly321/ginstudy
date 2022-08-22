@@ -1,7 +1,7 @@
 package home
 
 import (
-	gin "github.com/gin-gonic/gin"
+	"github.com/gin-gonic/gin"
 	"net/http"
 	"path"
 )
@@ -16,12 +16,15 @@ func (receiver BaseController) Success(context *gin.Context) {
 	})
 }
 
-func (con BaseController) UploadFile(ctx *gin.Context) {
+func (receiver BaseController) UploadFile(ctx *gin.Context) {
 	username := ctx.PostForm("username")
 	file, err := ctx.FormFile("file")
 	if err == nil {
 		filepath := path.Join("./static/upload/", file.Filename)
-		ctx.SaveUploadedFile(file, filepath)
+		err := ctx.SaveUploadedFile(file, filepath)
+		if err != nil {
+			return
+		}
 
 	}
 	ctx.JSON(http.StatusOK, gin.H{
