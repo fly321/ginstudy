@@ -20,6 +20,19 @@ func DemoRouter(r *gin.Engine) {
 			})
 		})
 
+		g1.GET("cookie/set", func(context *gin.Context) {
+			context.SetCookie("name", "value", 3600, "/", "localhost", false, true)
+		})
+
+		g1.GET("cookie/get", func(context *gin.Context) {
+			name, err := context.Cookie("name")
+			if err != nil {
+				context.String(http.StatusOK, "err: %s", err.Error())
+			} else {
+				context.String(http.StatusOK, "name: %s", name)
+			}
+		})
+
 		g1.POST("doUpload", home.BaseController{}.UploadFile)
 		g1.POST("doUploads", home.BaseController{}.UploadFiles)
 
