@@ -32,3 +32,18 @@ func (receiver BaseController) UploadFile(ctx *gin.Context) {
 		"file":     file.Filename,
 	})
 }
+
+func (receiver BaseController) UploadFiles(context *gin.Context) {
+	form, _ := context.MultipartForm()
+	files := form.File["files"]
+	for _, file := range files {
+		filepath := path.Join("./static/upload/", file.Filename)
+		err := context.SaveUploadedFile(file, filepath)
+		if err != nil {
+			return
+		}
+	}
+	context.JSON(http.StatusOK, gin.H{
+		"success": true,
+	})
+}

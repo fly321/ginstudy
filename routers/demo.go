@@ -21,6 +21,7 @@ func DemoRouter(r *gin.Engine) {
 		})
 
 		g1.POST("doUpload", home.BaseController{}.UploadFile)
+		g1.POST("doUploads", home.BaseController{}.UploadFiles)
 
 	}
 }
