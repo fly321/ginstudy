@@ -8,4 +8,5 @@ import (
 func UserRouter(r *gin.Engine) {
 	r.GET("/user/findAll", home.UserController{}.IndexSelect)
 	r.GET("/user/findAllGtAge20", home.UserController{}.IndexSelectAgeGt20)
+	r.GET("/user/createData", home.UserController{}.CreateData)
 }

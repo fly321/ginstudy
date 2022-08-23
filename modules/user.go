@@ -2,6 +2,7 @@ package modules
 
 type User struct {
 	Id       int
+	Age      int
 	Username string
 	Email    string
 	AddTime  int
