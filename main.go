@@ -175,6 +175,7 @@ func main() {
 	})
 
 	routers.DemoRouter(r)
+	routers.UserRouter(r)
 
 	err := r.Run(":8080")
 	if err != nil {
