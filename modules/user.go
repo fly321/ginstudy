@@ -2,8 +2,8 @@ package modules
 
 type User struct {
 	Id       int
-	Username int
-	Email    int
+	Username string
+	Email    string
 	AddTime  int
 }
 

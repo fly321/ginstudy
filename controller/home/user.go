@@ -20,5 +20,10 @@ func (con UserController) IndexSelect(context *gin.Context) {
 	userList := []modules.User{}
 	modules.DB.Find(&userList)
 	context.JSON(http.StatusOK, userList)
+}
 
+func (con UserController) IndexSelectAgeGt20(context *gin.Context) {
+	userList := []modules.User{}
+	modules.DB.Where("age>20").Find(&userList)
+	context.JSON(http.StatusOK, userList)
 }
