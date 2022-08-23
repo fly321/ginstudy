@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"ginstudy/controller/home"
 	"ginstudy/middleware"
+	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
@@ -31,6 +32,21 @@ func DemoRouter(r *gin.Engine) {
 			} else {
 				context.String(http.StatusOK, "name: %s", name)
 			}
+		})
+
+		g1.GET("session/set", func(context *gin.Context) {
+			session := sessions.Default(context)
+			session.Set("username", "fly321 小飞")
+			err := session.Save()
+			if err != nil {
+				return
+			}
+		})
+
+		g1.GET("session/get", func(context *gin.Context) {
+			session := sessions.Default(context)
+			username := session.Get("username")
+			context.String(200, "username= %#v", username)
 		})
 
 		g1.POST("doUpload", home.BaseController{}.UploadFile)

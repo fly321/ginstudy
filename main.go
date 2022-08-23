@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"ginstudy/controller/home"
 	"ginstudy/routers"
+	"github.com/gin-contrib/sessions"
+	"github.com/gin-contrib/sessions/cookie"
 	"github.com/gin-gonic/gin"
 	"html/template"
 	"net/http"
@@ -31,6 +33,11 @@ func middlewareGet(content *gin.Context) {
 func main() {
 	// Creates a gin router with default middleware:
 	r := gin.Default()
+
+	// 配置session中间件 > 创建基于cookie的存储引擎
+	store := cookie.NewStore([]byte("secret"))
+	r.Use(sessions.Sessions("mysession", store))
+
 	// 自定义模板函数 要写在加载模板之前
 	r.SetFuncMap(template.FuncMap{
 		"UnixToDate": UnixToDate,
