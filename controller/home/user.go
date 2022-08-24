@@ -50,5 +50,11 @@ func (con UserController) UpdateData(*gin.Context) {
 
 	user := modules.User{}
 	modules.DB.Model(&user).Where("id = ?", 3).Update("username", "aimer")
+}
 
+// DeleteData 删除
+func (con UserController) DeleteData(context *gin.Context) {
+	user := modules.User{Id: 3}
+	modules.DB.Delete(&user)
+	context.String(200, "删除用户")
 }

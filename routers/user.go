@@ -13,5 +13,6 @@ func UserRouter(r *gin.Engine) {
 		r1.GET("findAllGtAge20", home.UserController{}.IndexSelectAgeGt20)
 		r1.GET("createData", home.UserController{}.CreateData)
 		r1.GET("updateData", home.UserController{}.UpdateData)
+		r1.GET("deleteData", home.UserController{}.DeleteData)
 	}
 }
