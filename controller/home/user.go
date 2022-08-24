@@ -38,3 +38,15 @@ func (con UserController) CreateData(context *gin.Context) {
 	}
 	modules.DB.Create(&user)
 }
+
+// 修改数据
+func (con UserController) UpdateData(context *gin.Context) {
+	/*user := modules.User{Id: 3}
+	modules.DB.Find(&user)
+	user.Username = "吴老菊"
+	modules.DB.Save(&user)*/
+
+	user := modules.User{}
+	modules.DB.Model(&user).Where("id = ?", 3).Update("username", "aimer")
+
+}
